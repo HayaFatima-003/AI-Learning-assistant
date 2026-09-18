@@ -648,38 +648,7 @@
  
     </div>
  
-    <script>
- 
-        function askQuestion() {
- 
-            const question = document.getElementById("question").value;
- 
-            const response = document.getElementById("response");
- 
-            const answer = document.getElementById("answer");
- 
-            if (question.trim() === "") {
- 
-                alert("Please enter a question.");
- 
-                return;
- 
-            }
- 
-            answer.innerHTML =
-                "This prototype would retrieve the most relevant information from the selected learning material and generate an explanation based on that context.";
- 
-            response.style.display = "block";
-        }
- 
- 
-        function showMessage(message) {
- 
-            alert(message);
- 
-        }
- 
-    </script>
+ <script src="app.js"></script>
  
 </body>
 </html>
