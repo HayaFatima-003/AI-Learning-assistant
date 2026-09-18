@@ -1,0 +1,26 @@
+[
+  {
+    "topic": "Retrograde Condensation",
+    "chapter": "Phase Behavior",
+    "content": "Retrograde condensation occurs in gas-condensate reservoirs when the pressure falls below the dew-point pressure at reservoir temperature. As pressure decreases, liquid hydrocarbons condense from the gas phase. This is called retrograde condensation because liquid forms as pressure decreases, which is opposite to the behavior normally expected during vaporization.",
+    "source": "Phase Behavior — Gas Condensate Reservoirs"
+  },
+  {
+    "topic": "Dew Point Pressure",
+    "chapter": "PVT Properties",
+    "content": "Dew-point pressure is the pressure at which the first drop of liquid hydrocarbon forms from a gas phase at a specified temperature. For a gas-condensate system, crossing below the dew point can result in condensate formation near the wellbore.",
+    "source": "PVT Properties — Gas Condensate Systems"
+  },
+  {
+    "topic": "Condensate Banking",
+    "chapter": "Gas Condensate Reservoirs",
+    "content": "Condensate banking can occur near a producing well when the bottomhole pressure falls below the dew-point pressure. Liquid condensate accumulates around the wellbore and can reduce gas relative permeability, potentially reducing gas productivity.",
+    "source": "Gas Condensate Reservoirs — Well Deliverability"
+  },
+  {
+    "topic": "EOS Modeling",
+    "chapter": "PVT Modeling",
+    "content": "An equation of state can be tuned to laboratory PVT data so that the fluid model reproduces observed phase behavior. Parameters such as binary interaction coefficients and volume shifts may be adjusted during EOS tuning while maintaining physically reasonable fluid properties.",
+    "source": "PVT Modeling — EOS Tuning"
+  }
+]
