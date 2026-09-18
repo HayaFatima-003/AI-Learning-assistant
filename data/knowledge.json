@@ -2,25 +2,64 @@
   {
     "topic": "Retrograde Condensation",
     "chapter": "Phase Behavior",
-    "content": "Retrograde condensation occurs in gas-condensate reservoirs when the pressure falls below the dew-point pressure at reservoir temperature. As pressure decreases, liquid hydrocarbons condense from the gas phase. This is called retrograde condensation because liquid forms as pressure decreases, which is opposite to the behavior normally expected during vaporization.",
+    "subject": "Petroleum Engineering",
+
+    "explanation": "Retrograde condensation occurs in a gas-condensate reservoir when the reservoir pressure falls below the dew-point pressure at the reservoir temperature. Liquid hydrocarbons then condense from the gas phase as pressure decreases.",
+
+    "why": "The reservoir fluid exists as a gas at pressures above the dew point. When pressure falls below the dew point, the fluid enters a two-phase region and part of the heavier hydrocarbons condense into liquid.",
+
+    "practicalExample": "Consider a gas-condensate well producing at a bottomhole pressure below the dew-point pressure. Condensate can form near the wellbore. This liquid may reduce gas relative permeability and restrict gas flow toward the well.",
+
+    "keyTakeaway": "For a gas-condensate reservoir, pressure falling below the dew point can cause liquid condensate to form.",
+
     "source": "Phase Behavior — Gas Condensate Reservoirs"
   },
+
   {
     "topic": "Dew Point Pressure",
     "chapter": "PVT Properties",
-    "content": "Dew-point pressure is the pressure at which the first drop of liquid hydrocarbon forms from a gas phase at a specified temperature. For a gas-condensate system, crossing below the dew point can result in condensate formation near the wellbore.",
+    "subject": "Petroleum Engineering",
+
+    "explanation": "Dew-point pressure is the pressure at which the first drop of liquid hydrocarbon forms from a gas phase at a specified temperature.",
+
+    "why": "Above the dew point, the reservoir fluid can remain in a single gas phase. When pressure decreases to the dew point, the first liquid hydrocarbon appears. Further pressure reduction can increase the amount of liquid present.",
+
+    "practicalExample": "If a gas-condensate reservoir has a dew-point pressure of 4635 psia and the pressure near the wellbore falls below 4635 psia, condensate can begin forming in that region.",
+
+    "keyTakeaway": "The dew point marks the pressure where the first liquid hydrocarbon appears from a gas phase at a given temperature.",
+
     "source": "PVT Properties — Gas Condensate Systems"
   },
+
   {
     "topic": "Condensate Banking",
     "chapter": "Gas Condensate Reservoirs",
-    "content": "Condensate banking can occur near a producing well when the bottomhole pressure falls below the dew-point pressure. Liquid condensate accumulates around the wellbore and can reduce gas relative permeability, potentially reducing gas productivity.",
+    "subject": "Petroleum Engineering",
+
+    "explanation": "Condensate banking is the accumulation of liquid condensate around a producing well when the pressure near the wellbore falls below the dew-point pressure.",
+
+    "why": "As the pressure near the well decreases below the dew point, liquid condensate forms. Because this occurs in the region where gas is flowing toward the well, the accumulated liquid can reduce gas relative permeability and decrease gas productivity.",
+
+    "practicalExample": "Suppose a gas-condensate well initially produces efficiently. As production continues, the bottomhole pressure falls below the dew point. Condensate forms around the wellbore and creates a liquid-rich zone, which can restrict gas flow.",
+
+    "keyTakeaway": "Condensate banking is a near-wellbore phenomenon that can reduce gas productivity when pressure falls below the dew point.",
+
     "source": "Gas Condensate Reservoirs — Well Deliverability"
   },
+
   {
     "topic": "EOS Modeling",
     "chapter": "PVT Modeling",
-    "content": "An equation of state can be tuned to laboratory PVT data so that the fluid model reproduces observed phase behavior. Parameters such as binary interaction coefficients and volume shifts may be adjusted during EOS tuning while maintaining physically reasonable fluid properties.",
+    "subject": "Petroleum Engineering",
+
+    "explanation": "Equation-of-state modeling is used to represent the phase behavior and PVT properties of reservoir fluids. The EOS model can be tuned against laboratory PVT data so that the simulated fluid behavior more closely represents the actual reservoir fluid.",
+
+    "why": "Laboratory PVT experiments provide observations of real fluid behavior. An untuned EOS may not reproduce these observations accurately. EOS tuning adjusts parameters such as binary interaction coefficients and volume shifts to improve the agreement between the model and laboratory data.",
+
+    "practicalExample": "During gas-condensate PVT modeling, CCE and CVD laboratory data can be compared with the EOS simulation. Parameters can then be adjusted and the model rerun until the simulated phase behavior reasonably matches the laboratory observations.",
+
+    "keyTakeaway": "EOS tuning helps make a fluid model representative of laboratory PVT behavior before using it for reservoir studies.",
+
     "source": "PVT Modeling — EOS Tuning"
   }
 ]
