@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>AI Learning Assistant</title>
+ 
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+ 
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+ 
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+ 
+        .logo span {
+            color: #2563eb;
+        }
+ 
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+ 
+        .welcome {
+            margin-bottom: 30px;
+        }
+ 
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+ 
+        .welcome p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+ 
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+ 
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+ 
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+ 
+        .card-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+ 
+        .card h3 {
+            margin-bottom: 8px;
+        }
+ 
+        .card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+ 
+        .section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+ 
+        .section h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+ 
+        .select-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+ 
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+ 
+        .chat-box {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+ 
+        input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+ 
+        button {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+ 
+        button:hover {
+            background: #1d4ed8;
+        }
+ 
+        .response {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 6px;
+            display: none;
+        }
+ 
+        .response h3 {
+            margin-bottom: 10px;
+        }
+ 
+        .source {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+ 
+        .tools {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+ 
+        .tool-btn {
+            background: #eef2ff;
+            color: #3730a3;
+        }
+ 
+        .tool-btn:hover {
+            background: #e0e7ff;
+        }
+ 
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+ 
+            .select-row {
+                grid-template-columns: 1fr;
+            }
+ 
+            .chat-box {
+                flex-direction: column;
+            }
+        }
+</style>
+</head>
+ 
+<body>
+ 
+    <div class="header">
+<div class="logo">📚 <span>AI Learning</span> Assistant</div>
+<div>Prototype v1.0</div>
+</div>
+ 
+    <div class="container">
+ 
+        <div class="welcome">
+<h1>Learn from your knowledge library.</h1>
+<p>
+                Select a subject and chapter, then interact with the learning material.
+</p>
+</div>
+ 
+        <div class="cards">
+ 
+            <div class="card" onclick="showMessage('Ask questions about your selected learning material.')">
+<div class="card-icon">💬</div>
+<h3>Ask Questions</h3>
+<p>Interact with the material using natural-language questions.</p>
+</div>
+ 
+            <div class="card" onclick="showMessage('Quiz mode will test your understanding of the selected chapter.')">
+<div class="card-icon">📝</div>
+<h3>Quiz Yourself</h3>
+<p>Test your understanding with chapter-based questions.</p>
+</div>
+ 
+            <div class="card" onclick="showMessage('Flashcards will help you revise important concepts.')">
+<div class="card-icon">🃏</div>
+<h3>Flashcards</h3>
+<p>Review important concepts and definitions quickly.</p>
+</div>
+ 
+        </div>
+ 
+        <div class="section">
+ 
+            <h2>📖 Select Learning Material</h2>
+ 
+            <div class="select-row">
+ 
+                <select id="subject">
+<option>Petroleum Engineering</option>
+<option>Reservoir Engineering</option>
+<option>Process Engineering</option>
+</select>
+ 
+                <select id="chapter">
+<option>PVT Properties</option>
+<option>Phase Behavior</option>
+<option>Reservoir Fluid Properties</option>
+</select>
+ 
+            </div>
+ 
+        </div>
+ 
+        <div class="section">
+ 
+            <h2>🧑‍🏫 Ask Your AI Tutor</h2>
+ 
+            <p>
+                Ask a question related to the selected learning material.
+</p>
+ 
+            <div class="chat-box">
+ 
+                <input
+                    type="text"
+                    id="question"
+                    placeholder="e.g. Why does retrograde condensation occur?"
+>
+ 
+                <button onclick="askQuestion()">Ask</button>
+ 
+            </div>
+ 
+            <div class="response" id="response">
+ 
+                <h3>💡 Explanation</h3>
+ 
+                <p id="answer"></p>
+ 
+                <div class="source">
+                    📖 Source: PVT Properties → Phase Behavior
+</div>
+ 
+                <div class="tools">
+ 
+                    <button class="tool-btn" onclick="showMessage('Quiz mode coming next!')">
+                        📝 Quiz Me
+</button>
+ 
+                    <button class="tool-btn" onclick="showMessage('Flashcards coming next!')">
+                        🃏 Flashcards
+</button>
+ 
+                </div>
+ 
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+    <script>
+ 
+        function askQuestion() {
+ 
+            const question = document.getElementById("question").value;
+ 
+            const response = document.getElementById("response");
+ 
+            const answer = document.getElementById("answer");
+ 
+            if (question.trim() === "") {
+ 
+                alert("Please enter a question.");
+ 
+                return;
+ 
+            }
+ 
+            answer.innerHTML =
+                "This prototype would retrieve the most relevant information from the selected learning material and generate an explanation based on that context.";
+ 
+            response.style.display = "block";
+        }
+ 
+ 
+        function showMessage(message) {
+ 
+            alert(message);
+ 
+        }
+ 
+    </script>
+ 
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+    <title>AI Learning Assistant</title>
+ 
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+ 
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+        }
+ 
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+ 
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+ 
+        .logo span {
+            color: #2563eb;
+        }
+ 
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 25px;
+        }
+ 
+        .welcome {
+            margin-bottom: 30px;
+        }
+ 
+        .welcome h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+ 
+        .welcome p {
+            color: #6b7280;
+            font-size: 16px;
+        }
+ 
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+ 
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+ 
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+ 
+        .card-icon {
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+ 
+        .card h3 {
+            margin-bottom: 8px;
+        }
+ 
+        .card p {
+            color: #6b7280;
+            font-size: 14px;
+        }
+ 
+        .section {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+ 
+        .section h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+ 
+        .select-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+ 
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            background: white;
+        }
+ 
+        .chat-box {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+ 
+        input {
+            flex: 1;
+            padding: 14px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+ 
+        button {
+            padding: 14px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+ 
+        button:hover {
+            background: #1d4ed8;
+        }
+ 
+        .response {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            border-radius: 6px;
+            display: none;
+        }
+ 
+        .response h3 {
+            margin-bottom: 10px;
+        }
+ 
+        .source {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #6b7280;
+        }
+ 
+        .tools {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+ 
+        .tool-btn {
+            background: #eef2ff;
+            color: #3730a3;
+        }
+ 
+        .tool-btn:hover {
+            background: #e0e7ff;
+        }
+ 
+        @media (max-width: 700px) {
+            .cards {
+                grid-template-columns: 1fr;
+            }
+ 
+            .select-row {
+                grid-template-columns: 1fr;
+            }
+ 
+            .chat-box {
+                flex-direction: column;
+            }
+        }
+</style>
+</head>
+ 
+<body>
+ 
+    <div class="header">
+<div class="logo">📚 <span>AI Learning</span> Assistant</div>
+<div>Prototype v1.0</div>
+</div>
+ 
+    <div class="container">
+ 
+        <div class="welcome">
+<h1>Learn from your knowledge library.</h1>
+<p>
+                Select a subject and chapter, then interact with the learning material.
+</p>
+</div>
+ 
+        <div class="cards">
+ 
+            <div class="card" onclick="showMessage('Ask questions about your selected learning material.')">
+<div class="card-icon">💬</div>
+<h3>Ask Questions</h3>
+<p>Interact with the material using natural-language questions.</p>
+</div>
+ 
+            <div class="card" onclick="showMessage('Quiz mode will test your understanding of the selected chapter.')">
+<div class="card-icon">📝</div>
+<h3>Quiz Yourself</h3>
+<p>Test your understanding with chapter-based questions.</p>
+</div>
+ 
+            <div class="card" onclick="showMessage('Flashcards will help you revise important concepts.')">
+<div class="card-icon">🃏</div>
+<h3>Flashcards</h3>
+<p>Review important concepts and definitions quickly.</p>
+</div>
+ 
+        </div>
+ 
+        <div class="section">
+ 
+            <h2>📖 Select Learning Material</h2>
+ 
+            <div class="select-row">
+ 
+                <select id="subject">
+<option>Petroleum Engineering</option>
+<option>Reservoir Engineering</option>
+<option>Process Engineering</option>
+</select>
+ 
+                <select id="chapter">
+<option>PVT Properties</option>
+<option>Phase Behavior</option>
+<option>Reservoir Fluid Properties</option>
+</select>
+ 
+            </div>
+ 
+        </div>
+ 
+        <div class="section">
+ 
+            <h2>🧑‍🏫 Ask Your AI Tutor</h2>
+ 
+            <p>
+                Ask a question related to the selected learning material.
+</p>
+ 
+            <div class="chat-box">
+ 
+                <input
+                    type="text"
+                    id="question"
+                    placeholder="e.g. Why does retrograde condensation occur?"
+>
+ 
+                <button onclick="askQuestion()">Ask</button>
+ 
+            </div>
+ 
+            <div class="response" id="response">
+ 
+                <h3>💡 Explanation</h3>
+ 
+                <p id="answer"></p>
+ 
+                <div class="source">
+                    📖 Source: PVT Properties → Phase Behavior
+</div>
+ 
+                <div class="tools">
+ 
+                    <button class="tool-btn" onclick="showMessage('Quiz mode coming next!')">
+                        📝 Quiz Me
+</button>
+ 
+                    <button class="tool-btn" onclick="showMessage('Flashcards coming next!')">
+                        🃏 Flashcards
+</button>
+ 
+                </div>
+ 
+            </div>
+ 
+        </div>
+ 
+    </div>
+ 
+    <script>
+ 
+        function askQuestion() {
+ 
+            const question = document.getElementById("question").value;
+ 
+            const response = document.getElementById("response");
+ 
+            const answer = document.getElementById("answer");
+ 
+            if (question.trim() === "") {
+ 
+                alert("Please enter a question.");
+ 
+                return;
+ 
+            }
+ 
+            answer.innerHTML =
+                "This prototype would retrieve the most relevant information from the selected learning material and generate an explanation based on that context.";
+ 
+            response.style.display = "block";
+        }
+ 
+ 
+        function showMessage(message) {
+ 
+            alert(message);
+ 
+        }
+ 
+    </script>
+ 
+</body>
+</html>
