@@ -201,13 +201,19 @@ function displayTutorResponse(result) {
 // ASK QUESTION
 // ===============================
 
-function askQuestion() {
+async function askQuestion() {
 
     const questionInput =
         document.getElementById("question");
 
     const responseBox =
         document.getElementById("response");
+
+    const answerBox =
+        document.getElementById("answer");
+
+    const sourceBox =
+        document.getElementById("source");
 
 
     const question =
@@ -223,48 +229,131 @@ function askQuestion() {
     }
 
 
-    if (!knowledgeLoaded) {
+    // Show response box
+    responseBox.style.display = "block";
 
-        document.getElementById("answer").innerHTML =
-            "⏳ The learning library is still loading. Please try again in a moment.";
+    answerBox.innerHTML =
+        "⏳ Asking the KHT AI Assistant...";
 
-        responseBox.style.display = "block";
+    sourceBox.innerHTML =
+        "📖 Source: Searching knowledge base...";
 
-        return;
+
+    try {
+
+        const response = await fetch(
+            "YOUR_BACKEND_URL/ask?question=" +
+            encodeURIComponent(question)
+        );
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Backend request failed."
+            );
+
+        }
+
+
+        const data =
+            await response.json();
+
+
+        // =========================
+        // WORD RESPONSE
+        // =========================
+
+        if (data.source === "Word") {
+
+            answerBox.innerHTML = `
+
+                <strong>💡 ${data.section}</strong>
+
+                <p style="margin-top:10px;">
+                    ${data.content}
+                </p>
+
+            `;
+
+
+            sourceBox.innerHTML =
+                "📖 Source: KHT Knowledge Base → " +
+                data.section;
+
+        }
+
+
+        // =========================
+        // EXCEL RESPONSE
+        // =========================
+
+        else if (data.source === "Excel") {
+
+            answerBox.innerHTML = `
+
+                <strong>📊 Excel Data Found</strong>
+
+                <p style="margin-top:10px;">
+                    ${data.records_found} matching records found.
+                </p>
+
+            `;
+
+
+            sourceBox.innerHTML =
+                "📖 Source: KHT Sample Operational Data";
+
+        }
+
+
+        // =========================
+        // NOTHING FOUND
+        // =========================
+
+        else {
+
+            answerBox.innerHTML = `
+
+                <strong>🤔 No relevant information found.</strong>
+
+                <p style="margin-top:8px;">
+                    Try asking a question related to
+                    KHT operations, procedures, HSE,
+                    permits, or operational data.
+                </p>
+
+            `;
+
+
+            sourceBox.innerHTML =
+                "📖 Source: No relevant material found.";
+
+        }
 
     }
 
 
-    const result =
-        searchKnowledge(question);
+    catch (error) {
+
+        console.error(error);
 
 
-    if (result) {
+        answerBox.innerHTML = `
 
-        displayTutorResponse(result);
-
-    }
-
-    else {
-
-        document.getElementById("answer").innerHTML = `
-
-            <strong>🤔 I couldn't find that concept.</strong>
+            <strong>⚠️ Backend connection error</strong>
 
             <p style="margin-top:8px;">
-                Try asking about a concept available in the
-                current learning library.
+                The KHT AI Assistant could not connect
+                to the backend.
             </p>
 
         `;
 
 
-        document.getElementById("source").innerHTML =
-            "📖 Source: No relevant material found.";
+        sourceBox.innerHTML =
+            "📖 Source: Backend unavailable.";
 
     }
-
-
-    responseBox.style.display = "block";
 
 }
