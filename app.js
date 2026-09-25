@@ -242,7 +242,7 @@ async function askQuestion() {
     try {
 
         const response = await fetch(
-            "YOUR_BACKEND_URL/ask?question=" +
+            "https://ai-assistant-backend-vs18.onrender.com/ask?question=" +
             encodeURIComponent(question)
         );
 
